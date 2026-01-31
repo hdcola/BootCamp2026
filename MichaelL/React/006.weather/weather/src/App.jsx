@@ -10,14 +10,9 @@ function App() {
   return (
     <div className="app-container">
 
-
-
       <div className='app'>
         <Citycard />
       </div>
-
-
-
     </div>
   );
 }
