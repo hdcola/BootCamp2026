@@ -2,7 +2,42 @@ import React, { useEffect, useState } from 'react'
 import './citytemweather.css'
 
 function Citycard() {
-    const [weatherData, setWeatherData] = useState(null);
+    //     //初始数据，不要写成这样：
+
+    // function Citycard() {
+
+    // const [weatherData, setWeatherData] = useState(null);
+
+    // setWeatherData({
+
+    // humidity: "--",
+
+    // windSpeed: "--",
+
+    // temperature: "--",
+
+    // maxTemp: "--",
+
+    // minTemp: "--",
+
+    // sunrise: "--",
+
+    // sunset: "--"
+
+    // }
+
+
+    const [weatherData, setWeatherData] = useState({
+        humidity: '--',
+        windSpeed: '--',
+        temperature: '--',
+        maxTemp: '--',
+        minTemp: '--',
+        sunrise: '--',
+        sunset: '--'
+    });
+
+    const [message, setMessage] = useState('获取中>__<');
 
     const search = async () => {
         try {
@@ -20,14 +55,15 @@ function Citycard() {
                 sunrise: new Date(data.daily.sunrise[0]).toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' }),
                 sunset: new Date(data.daily.sunset[0]).toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' })
             })
+            setMessage('成功了！！！');
         } catch (error) {
-            console.error(error);
+            setMessage('成功失败！');
         }
     }
 
     useEffect(() => { search() }, [])
 
-    if (!weatherData) return null;
+
 
     return (
         <div className='weather-container'>
@@ -37,6 +73,9 @@ function Citycard() {
                         <span className='location-icon'>📍</span>
                         <div>
                             <h2 className='city-name'>Calgary</h2>
+                            <p className='hihihihi'>
+                                {message}
+                            </p>
                         </div>
                     </div>
                 </div>

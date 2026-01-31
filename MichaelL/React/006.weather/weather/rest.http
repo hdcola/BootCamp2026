@@ -1,4 +1,4 @@
-GET https://api.openweathermap.org/data/2.5/weather?lat=51.10570&lon=-114.13631&appid=392c91f29e72497d445ea857cda5cd12
+GET https://api.openweathermap.org/data/2.5/weather?lat=51.10570&lon=-114.13631&appid={{$dotenv VITE_APP_ID}}
 
 ###3.0
 GET https://api.open-meteo.com/v1/forecast?latitude=52.52&longitude=13.41&current=temperature_2m,wind_speed_10m&hourly=temperature_2m,relative_humidity_2m,wind_speed_10m
