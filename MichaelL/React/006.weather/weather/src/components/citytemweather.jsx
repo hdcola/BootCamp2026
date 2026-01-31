@@ -44,6 +44,9 @@ function Citycard() {
             //不是openweather
             const url = `https://api.open-meteo.com/v1/forecast?latitude=51.10570&longitude=-114.13631&current=temperature_2m,wind_speed_10m,relative_humidity_2m&daily=temperature_2m_max,temperature_2m_min,sunrise,sunset&timezone=auto`
             const response = await fetch(url);
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
             const data = await response.json();
 
             setWeatherData({
@@ -57,10 +60,10 @@ function Citycard() {
             })
             setMessage('成功了！！！');
         } catch (error) {
-            setMessage('成功失败！');
+            setMessage('失败！');
         }
     }
-
+    // Fetch weather data once when the component mounts
     useEffect(() => { search() }, [])
 
 
@@ -73,7 +76,7 @@ function Citycard() {
                         <span className='location-icon'>📍</span>
                         <div>
                             <h2 className='city-name'>Calgary</h2>
-                            <p className='hihihihi'>
+                            <p className='status-message'>
                                 {message}
                             </p>
                         </div>
