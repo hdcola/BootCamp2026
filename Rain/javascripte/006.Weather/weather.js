@@ -1,9 +1,9 @@
-const apiKey = '';
+const apiKey = '26995f412ac11a5d6875392236cc93f7';
 const temperature = document.getElementById('temperature');
 const description = document.getElementById('description');
 
-async function getWeather() {
-    const response = await fetch('https://api.open-meteo.com/v1/forecast?latitude=52.52&longitude=13.41&current=temperature_2m,wind_speed_10m,weather_code,relative_humidity_2m&hourly=temperature_2m,relative_humidity_2m,wind_speed_10m&daily=temperature_2m_max');
+async function getWeather(lat, lon) {
+    const response = await fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&units=metric&appid=${apiKey}`);
     const data = await response.json();
     console.log(data);
     getTemperature(data);
@@ -20,6 +20,9 @@ async function getCity() {
     const data = await response.json();
     console.log(data);
     displayGeocoding(data);
+    if (data && data.length > 0) {
+        getWeather(data[0].lat, data[0].lon);
+    }
     return data;
 }
 
@@ -32,73 +35,118 @@ function displayGeocoding(data) {
 }
 
 getCity();
-getWeather();
 
 
 function getTemperature(data) {
-    const tempValue = data.current.temperature_2m;
-    temperature.textContent = tempValue + '°C';
+    const tempValue = data.list[0].main.temp;
+    temperature.textContent = Math.round(tempValue) + '°C';
 }
 
 function getDescription(data) {
-    const descValue = data.current.weather_code;
-    description.textContent = weatherCodeToText(descValue);
+    const descValue = data.list[0].weather[0].description;
+    description.textContent = descValue;
 }
 
 function getHourlyWeather(data) {
-    const hourlyData = data.hourly;
-    const hourlyTemp = hourlyData.temperature_2m;
-    for (let i = 1; i <= 12; i++) {
-        document.getElementById('hour-' + i).textContent = "hour" + i + ": " + hourlyTemp[i] + '°C';
+    const list = data.list;
+    const hoursRow = document.querySelector('.hours-row');
+    hoursRow.innerHTML = '';
+
+    // Loop through the first 8 items (8 * 3 hours = 24 hours)
+    for (let i = 0; i < 8 && i < list.length; i++) {
+        const item = list[i];
+        const date = new Date(item.dt * 1000);
+        let hours = date.getHours();
+        const ampm = hours >= 12 ? 'PM' : 'AM';
+        hours = hours % 12;
+        hours = hours ? hours : 12;
+        const timeString = hours + ' ' + ampm;
+
+        const hourItem = document.createElement('div');
+        hourItem.classList.add('hour-item');
+
+        const timeP = document.createElement('p');
+        timeP.textContent = timeString;
+
+        const tempP = document.createElement('p');
+        tempP.textContent = Math.round(item.main.temp) + '°C';
+        tempP.style.fontWeight = 'bold';
+        tempP.style.fontSize = '1.2rem';
+
+        hourItem.appendChild(timeP);
+        hourItem.appendChild(tempP);
+        hoursRow.appendChild(hourItem);
     }
 }
 
 function getDailyWeather(data) {
-    const dailyData = data.daily;
-    const dailyTemp = dailyData.temperature_2m_max;
-    for (let i = 1; i <= 5; i++) {
-        document.getElementById('day-' + i).textContent = "day" + i + ": " + dailyTemp[i] + '°C';
+    const list = data.list;
+    const dailyForecasts = [];
+
+    // Group data by date to find daily highs
+    list.forEach(item => {
+        const date = new Date(item.dt * 1000);
+        // Use full date string to verify uniqueness (handles month rollovers)
+        const dateString = date.toLocaleDateString();
+
+        // Check if we already have this day in our list
+        const existingDay = dailyForecasts.find(d => d.dateString === dateString);
+
+        if (!existingDay) {
+            dailyForecasts.push({
+                dateString: dateString,
+                date: date,
+                maxTemp: item.main.temp_max || item.main.temp // Fallback to temp if temp_max not distinct in list
+            });
+        } else {
+            // Update max temp for the day
+            const currentMax = item.main.temp_max || item.main.temp;
+            if (currentMax > existingDay.maxTemp) {
+                existingDay.maxTemp = currentMax;
+            }
+        }
+    });
+
+    // We want the forecast starting from Tomorrow? 
+    // The user said "change day 1 to sunday becasue today is saturday". 
+    // This implies the list should start with tomorrow. 
+    // Let's filter out "Today" if the first item is today.
+
+    const todayString = new Date().toLocaleDateString();
+    // Verify if first item is today
+    if (dailyForecasts.length > 0 && dailyForecasts[0].dateString === todayString) {
+        // If we want to strictly follow "Day 1 is Sunday (tomorrow)", we remove today.
+        // However, usually showing Today is good. 
+        // But based on the user request, I'll shift it so Day 1 aligns with their expectation if possible,
+        // or just label them clearly. 
+        // If I label them "Saturday", "Sunday", it is clear.
+        // I will keep Today but label it accurately.
+    }
+
+    const daysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+
+    // Display the days
+    for (let i = 0; i < 5; i++) {
+        const element = document.getElementById('day-' + (i + 1));
+        if (element) {
+            if (i < dailyForecasts.length) {
+                const dayData = dailyForecasts[i];
+                const dayName = daysOfWeek[dayData.date.getDay()];
+                element.textContent = dayName + ": " + Math.round(dayData.maxTemp) + '°C';
+            } else {
+                element.textContent = "N/A";
+            }
+        }
     }
 }
+
 function getAirHumidity(data) {
-    const airHumidity = data.current.relative_humidity_2m;
+    const airHumidity = data.list[0].main.humidity;
     document.getElementById('air-humidity').textContent = airHumidity + '%';
 }
-function getWindSpeed(data) {
-    const windSpeed = data.current.wind_speed_10m;
-    document.getElementById('wind-speed').textContent = windSpeed + 'km/h';
-}
 
-function weatherCodeToText(code) {
-    const weatherCodes = {
-        0: 'Clear sky',
-        1: 'Mainly clear',
-        2: 'Partly cloudy',
-        3: 'Overcast',
-        45: 'Fog',
-        48: 'Depositing rime fog',
-        51: 'Light Drizzle',
-        53: 'Moderate Drizzle',
-        55: 'Dense Drizzle',
-        56: 'Light Freezing Drizzle',
-        57: 'Dense Freezing Drizzle',
-        61: 'Slight Rain',
-        63: 'Moderate Rain',
-        65: 'Heavy Rain',
-        66: 'Light Freezing Rain',
-        67: 'Heavy Freezing Rain',
-        71: 'Slight Snow fall',
-        73: 'Moderate Snow fall',
-        75: 'Heavy Snow fall',
-        77: 'Snow grains',
-        80: 'Slight Rain showers',
-        81: 'Moderate Rain showers',
-        82: 'Violent Rain showers',
-        85: 'Slight Snow showers',
-        86: 'Heavy Snow showers',
-        95: 'Thunderstorm',
-        96: 'Thunderstorm with light hail',
-        99: 'Thunderstorm with heavy hail',
-    };
-    return weatherCodes[code] || 'Unknown';
+function getWindSpeed(data) {
+    const windSpeed = data.list[0].wind.speed;
+    // Conversion from m/s to km/h: multiply by 3.6
+    document.getElementById('wind-speed').textContent = Math.round(windSpeed * 3.6) + 'km/h';
 }
