@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+
+<body>
+
+    <div class="search-box">
+        <input type="text" aria-label="Search city">
+    </div>
+    <div class="sideBar">
+        <div class="city-name">
+            <p>Oakville</p>
+        </div>
+    </div>
+
+    <div class="main-content">
+        <div class="main-content-left">
+            <div class="weather-today">
+                <div class="location">
+                    <h1>Oakville</h1>
+                </div>
+                <div class="temperature">
+                    <h3 id="temperature"></h3>
+                </div>
+                <div class="description">
+                    <h4 id="description"></h4>
+                </div>
+            </div>
+            <div class="weather-hourly">
+                <div class="p-hour">
+                    <p>Hourly Forecast</p>
+                </div>
+                <div class="hours-row">
+                </div>
+            </div>
+            <div class="weather-daily">
+                <div class="p-daily">
+                    <p>Daily Forecast</p>
+                </div>
+                <div class="daily-column">
+                    <div class="day-item day-1">
+                        <p id="day-1"></p>
+                    </div>
+                    <div class="day-item day-2">
+                        <p id="day-2"></p>
+                    </div>
+                    <div class="day-item day-3">
+                        <p id="day-3"></p>
+                    </div>
+                    <div class="day-item day-4">
+                        <p id="day-4"></p>
+                    </div>
+                    <div class="day-item day-5">
+                        <p id="day-5"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="main-content-right">
+            <div class="attitude">
+                <div class="latitude">
+                    <p id="latitude"></p>
+                </div>
+                <div class="longitude">
+                    <p id="longitude"></p>
+                </div>
+            </div>
+            <div class="air-quality">
+                <div class="detail-item precipitation">
+                    <p>Humidity: <span id="air-humidity"></span></p>
+                </div>
+                <div class="wind-section">
+                    <p>Wind Speed: <span id="wind-speed"></span></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="weather.js"></script>
+</body>
+
+</html>

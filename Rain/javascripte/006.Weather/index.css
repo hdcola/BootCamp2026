@@ -1,0 +1,379 @@
+p {
+    margin: 0;
+    padding: 0;
+    color: white;
+}
+
+h1 {
+    margin: 0;
+    padding: 0;
+    color: white;
+}
+
+h2 {
+    margin: 0;
+    padding: 0;
+    color: white;
+}
+
+h3 {
+    margin: 0;
+    padding: 0;
+    color: white;
+}
+
+h4 {
+    margin: 0;
+    padding: 0;
+    color: white;
+}
+
+
+body {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    background-color: rgb(14, 112, 174);
+    margin: 0;
+    padding-bottom: 0;
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.search-box {
+    width: 100%;
+    height: 8%;
+    background-color: rgb(14, 112, 174);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+}
+
+.city-name {
+    width: 80%;
+    height: 10%;
+    background-color: rgb(14, 112, 174);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+    padding: 0;
+}
+
+.city-name:hover {
+    background-color: rgb(139, 178, 202);
+    cursor: pointer;
+}
+
+.sideBar {
+    width: 15%;
+    height: 92%;
+    background-color: rgb(62, 152, 209);
+    display: flex;
+    align-content: flex-start;
+    justify-content: center;
+    align-items: flex-start;
+    margin: 0;
+    padding: 0;
+}
+
+.search-box input {
+    width: 98%;
+    height: 60%;
+    display: flex;
+    border-radius: 10px;
+    border-style: none;
+    border-color: white;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+}
+
+.main-content {
+    width: 85%;
+    height: 92%;
+    display: flex;
+    flex-direction: row;
+    background-color: rgb(14, 112, 174);
+    align-content: flex-start;
+    justify-content: center;
+    align-items: flex-start;
+    margin: 0;
+    padding: 0;
+}
+
+.main-content-left {
+    width: 70%;
+    height: 100%;
+    background-color: rgb(30, 120, 176);
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+}
+
+.main-content-right {
+    width: 30%;
+    height: 100%;
+    background-color: rgb(30, 120, 176);
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+}
+
+.weather-today {
+    width: 90%;
+    height: 30%;
+    background-color: rgb(14, 112, 174);
+    display: flex;
+    flex-direction: column;
+    align-content: flex-start;
+    align-items: flex-start;
+    border-radius: 20px;
+    margin-top: 10px;
+    padding: 0;
+}
+
+.location {
+    width: 100%;
+    height: 40%;
+    display: flex;
+    flex-direction: column;
+    align-content: flex-start;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+    padding: 0;
+}
+
+.temperature {
+    width: 100%;
+    height: 20%;
+    display: flex;
+    flex-direction: column;
+    align-content: flex-start;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+    padding: 0;
+}
+
+.description {
+    width: 100%;
+    height: 20%;
+
+    display: flex;
+    flex-direction: column;
+    align-content: flex-start;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+    padding: 0;
+}
+
+.weather-hourly {
+    width: 90%;
+    height: 30%;
+    background-color: rgb(14, 112, 174);
+    display: flex;
+    flex-direction: column;
+    align-content: flex-start;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 20px;
+    margin-top: 10px;
+    padding: 0;
+}
+
+.p-hour {
+    width: 100%;
+    height: 20%;
+    background-color: transparent;
+    color: white;
+    font-size: 1.2rem;
+    font-weight: bold;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin-top: 0;
+    padding-left: 20px;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+}
+
+.hours-row {
+    width: 95%;
+    height: 70%;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+
+    align-items: center;
+    gap: 10px;
+    overflow-x: auto;
+    white-space: nowrap;
+    padding-bottom: 5px;
+}
+
+.hours-row::-webkit-scrollbar {
+    display: none;
+}
+
+.hours-row {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+.hour-item {
+    min-width: 80px;
+    height: 80%;
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    flex-shrink: 0;
+}
+
+
+
+.weather-daily {
+    width: 90%;
+    height: 40%;
+    background-color: rgb(14, 112, 174);
+    display: flex;
+    flex-direction: column;
+    align-content: flex-start;
+    justify-content: flex-start;
+    align-items: center;
+    border-radius: 20px;
+    margin-top: 10px;
+    padding: 0;
+}
+
+.p-daily {
+    width: 100%;
+    height: 10%;
+    background-color: transparent;
+    color: white;
+    font-size: 1.2rem;
+    font-weight: bold;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding-left: 20px;
+}
+
+.daily-column {
+    width: 95%;
+    height: 85%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 10px;
+    padding-bottom: 10px;
+}
+
+.day-item {
+    width: 100%;
+    height: 18%;
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+}
+
+.attitude {
+    width: 100%;
+    height: 40%;
+    background-color: rgb(14, 112, 174);
+    display: flex;
+    flex-direction: column;
+    align-content: flex-start;
+    justify-content: center;
+    align-items: center;
+    border-radius: 20px;
+    margin-top: 10px;
+    padding: 0;
+}
+
+.air-quality {
+    width: 100%;
+    height: 40%;
+    background-color: rgb(14, 112, 174);
+    display: flex;
+    flex-direction: column;
+    align-content: flex-start;
+    justify-content: space-evenly;
+    align-items: center;
+    border-radius: 20px;
+    margin-top: 10px;
+    padding: 0;
+}
+
+.detail-item {
+    width: 90%;
+    height: 25%;
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-weight: bold;
+}
+
+
+.wind-section {
+    width: 90%;
+    height: 45%;
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-weight: bold;
+}
+
+.latitude {
+    width: 90%;
+    height: 40%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(255, 255, 255, 0.2);
+    color: white;
+    border-radius: 15px;
+    font-weight: bold;
+}
+
+.longitude {
+    width: 90%;
+    height: 40%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(255, 255, 255, 0.2);
+    color: white;
+    border-radius: 15px;
+    font-weight: bold;
+    margin-top: 10px;
+}
