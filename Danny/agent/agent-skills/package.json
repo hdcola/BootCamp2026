@@ -1,0 +1,28 @@
+{
+  "name": "agent-skills-vercel-ai",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Integration of Agent Skills with Vercel AI SDK",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc",
+    "start": "tsx examples/basic-usage.ts",
+    "test": "tsx examples/test-loader.ts"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@ai-sdk/openai": "^3.0.26",
+    "ai": "^6.0.77",
+    "dotenv": "^16.3.1",
+    "yaml": "^2.3.4",
+    "zod": "^3.22.4"
+  },
+  "devDependencies": {
+    "@types/node": "^20.19.32",
+    "ts-node": "^10.9.2",
+    "tsx": "^4.21.0",
+    "typescript": "^5.3.3"
+  }
+}
