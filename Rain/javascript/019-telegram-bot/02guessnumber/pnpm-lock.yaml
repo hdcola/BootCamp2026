@@ -1,0 +1,32 @@
+lockfileVersion: '9.0'
+
+settings:
+  autoInstallPeers: true
+  excludeLinksFromLockfile: false
+
+importers:
+
+  .:
+    dependencies:
+      dotenv:
+        specifier: ^17.4.2
+        version: 17.4.2
+      node-telegram-bot-api:
+        specifier: ^2.0.0
+        version: 2.0.0
+
+packages:
+
+  dotenv@17.4.2:
+    resolution: {integrity: sha512-nI4U3TottKAcAD9LLud4Cb7b2QztQMUEfHbvhTH09bqXTxnSie8WnjPALV/WMCrJZ6UV/qHJ6L03OqO3LcdYZw==}
+    engines: {node: '>=12'}
+
+  node-telegram-bot-api@2.0.0:
+    resolution: {integrity: sha512-Gqo1HNYkIfYnHy25rEMKFFMVLqG+EUmH+C5HLsOguXi4WazaGWwIu9vigMLARv+cKONdU6x9Fj4lKNBLf7h/Uw==}
+    engines: {node: '>=18'}
+
+snapshots:
+
+  dotenv@17.4.2: {}
+
+  node-telegram-bot-api@2.0.0: {}
