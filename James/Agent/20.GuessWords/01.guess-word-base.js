@@ -7,6 +7,13 @@ const bot = new Bot(process.env.BOT_TOKEN);
 
 const games = new Map();   // 当前正在进行的局
 
+bot.api.setMyCommands({
+    commands: [
+        { command: 'start', description: '🎮 开始猜单词游戏' },
+        { command: 'stop', description: '🔚 结束本局游戏' },
+    ],
+
+})
 
 
 bot.command('start', async (ctx) => {
@@ -47,6 +54,8 @@ bot.command('stop', (ctx) => {
     }
 
 })
+
+
 
 bot.hears(/^[a-zA-Z]+$/, (ctx) => {
     const id = ctx.from.id
